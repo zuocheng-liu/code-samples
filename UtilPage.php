@@ -69,23 +69,23 @@ class UtilPage {
         return $this->getRequestUrl() .'?'. http_build_query(array_merge($_GET,$_POST,array($keyName => $pageNo)));
     }
     public function getNextPageUrl() {
-        $this->getUrlByPage($this->_pageNo + 1);
+        return $this->getUrlByPage($this->getPageNo() + 1);
     }
     public function getLastPageUrl() {
-        $this->getUrlByPage($this->_pageNo + 1);
+        return $this->getUrlByPage($this->getTotalPageNum());
     }
     public function getFirstPageUrl() {
-        $this->getUrlByPage(1);
+        return $this->getUrlByPage(1);
     }
     public function getPreviousPageUrl() {
-        $this->getUrlByPage($this->_pageNo - 1);
+        return $this->getUrlByPage($this->getPageNo() - 1);
     }
     public function getPageListLength()
     {
         return $this->_pageListLength;
     }
     public function getPageNo() {
-        return $this->_pageNo;
+        return intval($this->_pageNo);
     }
     public function getMaxDisplayPageNo()
     {
