@@ -13,25 +13,21 @@
 #define SERV_PORT 5555
 #define INFTIM 1000
 
-void setnonblocking(int sock)
-{
+void setnonblocking(int sock) {
     int opts;
     opts = fcntl(sock, F_GETFL);
-    if(opts < 0)
-    {
+    if(opts < 0) {
         perror("fcntl(sock,GETFL)");
         exit(1);
     }
     opts = opts | O_NONBLOCK;
-    if(fcntl(sock, F_SETFL, opts) < 0)
-    {
+    if(fcntl(sock, F_SETFL, opts) < 0) {
         perror("fcntl(sock,SETFL,opts)");
         exit(1);
     }
 }
 
-int main()
-{
+int main() {
     int i, maxi, listenfd, connfd, sockfd, epfd, nfds;
     ssize_t n;
     char line[MAXLINE];
@@ -61,51 +57,39 @@ int main()
     serveraddr.sin_port = htons(SERV_PORT);
     bind(listenfd, (sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(listenfd, LISTENQ);
-
+    
     maxi = 0;
-    for ( ; ; )
-    {
+    for ( ; ; ) {
         //等待epoll事件的发生
         nfds = epoll_wait(epfd, events, 20, 500);
         //处理所发生的所有事件
-        for(i = 0; i < nfds; ++i)
-        {
-            if(events[i].data.fd == listenfd)
-            {
-
+        for(i = 0; i < nfds; ++i) {
+            if(events[i].data.fd == listenfd) {
                 connfd = accept(listenfd, (sockaddr *)&clientaddr, &clilen);
-                if(connfd < 0)
-                {
+                if(connfd < 0) {
                     perror("connfd<0");
                     exit(1);
                 }
                 setnonblocking(connfd);
-
+                
                 char *str = inet_ntoa(clientaddr.sin_addr);
-                std::cout << "connect from " < _u115 ? tr << std::endl;
+                std::cout << "connect from " << str << std::endl;
                 //设置用于读操作的文件描述符
                 ev.data.fd = connfd;
                 //设置用于注测的读操作事件
                 ev.events = EPOLLIN | EPOLLET;
                 //注册ev
                 epoll_ctl(epfd, EPOLL_CTL_ADD, connfd, &ev);
-            }
-            else if(events[i].events & EPOLLIN)
-            {
+            } else if(events[i].events & EPOLLIN) {
                 if ( (sockfd = events[i].data.fd) < 0) continue;
-                if ( (n = read(sockfd, line, MAXLINE)) < 0)
-                {
-                    if (errno == ECONNRESET)
-                    {
-
+                if ( (n = read(sockfd, line, MAXLINE)) < 0) {
+                    if (errno == ECONNRESET) {
                         close(sockfd);
                         events[i].data.fd = -1;
-                    }
-                    else
+                    } else {
                         std::cout << "readline error" << std::endl;
-                }
-                else if (n == 0)
-                {
+                    }
+                } else if (n == 0) {
                     close(sockfd);
                     events[i].data.fd = -1;
                 }
@@ -115,9 +99,7 @@ int main()
                 ev.events = EPOLLOUT | EPOLLET;
                 //修改sockfd上要处理的事件为EPOLLOUT
                 epoll_ctl(epfd, EPOLL_CTL_MOD, sockfd, &ev);
-            }
-            else if(events[i].events & EPOLLOUT)
-            {
+            } else if(events[i].events & EPOLLOUT) {
                 sockfd = events[i].data.fd;
                 write(sockfd, line, n);
                 //设置用于读操作的文件描述符
@@ -127,8 +109,6 @@ int main()
                 //修改sockfd上要处理的事件为EPOLIN
                 epoll_ctl(epfd, EPOLL_CTL_MOD, sockfd, &ev);
             }
-
         }
-
     }
 }
