@@ -28,7 +28,7 @@ void setnonblocking(int sock) {
 }
 
 int main() {
-    int i, maxi, listenfd, connfd, sockfd, epfd, nfds;
+    int i, listenfd, connfd, sockfd, epfd, nfds;
     ssize_t n;
     char line[MAXLINE];
     socklen_t clilen;
@@ -58,7 +58,6 @@ int main() {
     bind(listenfd, (sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(listenfd, LISTENQ);
     
-    maxi = 0;
     for ( ; ; ) {
         //等待epoll事件的发生
         nfds = epoll_wait(epfd, events, 20, 500);
