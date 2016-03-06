@@ -11,6 +11,10 @@ using namespace std;
 int unorder[12] = {7,3,1,3,6,7,8,9,9,5,3,1};
 int ordered[12] = {1,1,3,3,3,5,6,7,7,8,9,9};
 
+void swap(int &a, int &b) {
+    a ^= b ^= a ^= b;
+}
+
 /**
  * Insert Sort
  * Time complexition : O(N)
@@ -33,6 +37,7 @@ int insert_sort(int* list, int listLength) {
 }
 
 int shell_sort(int* list, int listLength) {
+
     
 }
 int select_sort(int* list, int listLength) {
@@ -92,16 +97,52 @@ int quick_sort(int* list, int listLength) {
     quick_sort(list + t, length - t);
 }
 
-int heap_sort(int* list, int length) {
-    int i,j;
-    if (NULL == list || length <= 1) {
-        return 0;
+void heap_create(int* list, int length) {
+    int i;
+    int root, left, right; 
+    int k = length / 2;
+    for (i = k; i >= 0; --i) {
+        root = i;
+        left = 2 * i; 
+        right = 2 * i + 1; 
+        if (list[root] > list[left] && list[root] > list[right]) {
+            continue;
+        } else if(list[left] > list[root] && list[left] >= list[right]) {
+            swap(list[left], list[root]);           
+        } else if(list[right] > list[root] && list[right] > list[left]) {
+            swap(list[right], list[root]);           
+        }
     }
-    
-    list[length - 1] ^= list[0] ^= list[length - 1] ^= list[0];
-    return heap_sort(list, length - 1);
 }
 
+void heap_ajust(int* list, int length) {
+    int i;
+    int root, left, right; 
+    int k = length / 2;
+    for (i = 0; i < k; ++i) {
+        root = i;
+        left = 2 * i; 
+        right = 2 * i + 1; 
+        if (list[root] > list[left] && list[root] > list[right]) {
+            break;
+        } else if(list[left] > list[root] && list[left] >= list[right]) {
+            swap(list[left], list[root]);           
+            i = left;
+        } else if(list[right] > list[root] && list[right] > list[left]) {
+            swap(list[right], list[root]);
+            i = right;
+        }
+    }
+}
+
+int heap_sort(int* list, int length) {
+    int i;
+    heap_create(list, length);
+    for (i = 0; i< length; ++i) {
+        swap(list[0], list[length - i - 1]);
+        heap_ajust(list, length - i);
+    }
+}
 
 int main() {
     
