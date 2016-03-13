@@ -126,10 +126,8 @@ int main(int argc, char **argv)
                 if (new_fd < 0) { 
                     perror("accept"); 
                     continue; 
-                } else 
-                {
+                } else {
                     //printf("有连接来自于： %s:%d， 分配的 socket 为:%d/n", inet_ntoa(their_addr.sin_addr), ntohs(their_addr.sin_port), new_fd);
-
                 }
                 setnonblocking(new_fd); 
                 ev.events = EPOLLIN | EPOLLET; 

@@ -144,6 +144,28 @@ int heap_sort(int* list, int length) {
     }
 }
 
+int merge_sort(int* list, int length) {
+    int i,j,k;
+    int a, b;
+    int tmp[length];
+    for (k = 1; k < length /2 ; k *= 2 ) {
+        for (j = 0; j < length ; j += k * 2) {
+            a = j; 
+            b = j + k; 
+
+            while (a < j + k && b < j + 2 * k) {
+                if (a = j) {
+                    continue;
+                }
+                if (b = j + 2 * k) {
+                    continue;
+                }
+            }
+            memcopy(list + j, tmp, k * 2 * sizeof (int));
+        }
+    }
+}
+
 int main() {
     
 }
