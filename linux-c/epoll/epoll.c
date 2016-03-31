@@ -1,4 +1,3 @@
-#include <iostream>
 #include <sys/socket.h>
 #include <sys/epoll.h>
 #include <netinet/in.h>
@@ -6,8 +5,10 @@
 #include <fcntl.h>
 #include <unistd.h>
 #include <stdio.h>
-
-#define MAXLINE 10
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#define MAXLINE 5
 #define OPEN_MAX 100
 #define LISTENQ 20
 #define SERV_PORT 5555
@@ -52,10 +53,10 @@ int main() {
     bzero(&serveraddr, sizeof(serveraddr));
     serveraddr.sin_family = AF_INET;
 
-    char *local_addr = "200.200.200.204";
+    char *local_addr = "127.0.0.1";
     inet_aton(local_addr, &(serveraddr.sin_addr)); //htons(SERV_PORT);
     serveraddr.sin_port = htons(SERV_PORT);
-    bind(listenfd, (sockaddr *)&serveraddr, sizeof(serveraddr));
+    bind(listenfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(listenfd, LISTENQ);
     
     for ( ; ; ) {
@@ -64,7 +65,7 @@ int main() {
         //处理所发生的所有事件
         for(i = 0; i < nfds; ++i) {
             if(events[i].data.fd == listenfd) {
-                connfd = accept(listenfd, (sockaddr *)&clientaddr, &clilen);
+                connfd = accept(listenfd, (struct sockaddr *)&clientaddr, &clilen);
                 if(connfd < 0) {
                     perror("connfd<0");
                     exit(1);
@@ -72,7 +73,7 @@ int main() {
                 setnonblocking(connfd);
                 
                 char *str = inet_ntoa(clientaddr.sin_addr);
-                std::cout << "connect from " << str << std::endl;
+                printf("connect from ");
                 //设置用于读操作的文件描述符
                 ev.data.fd = connfd;
                 //设置用于注测的读操作事件
@@ -86,7 +87,7 @@ int main() {
                         close(sockfd);
                         events[i].data.fd = -1;
                     } else {
-                        std::cout << "readline error" << std::endl;
+                        printf("readline error");
                     }
                 } else if (n == 0) {
                     close(sockfd);
@@ -100,6 +101,7 @@ int main() {
                 epoll_ctl(epfd, EPOLL_CTL_MOD, sockfd, &ev);
             } else if(events[i].events & EPOLLOUT) {
                 sockfd = events[i].data.fd;
+                sleep(3);
                 write(sockfd, line, n);
                 //设置用于读操作的文件描述符
                 ev.data.fd = sockfd;

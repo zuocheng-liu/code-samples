@@ -1,0 +1,352 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+AE_ALL_EVENTS	include/ae.h	47;"	d
+AE_DONT_WAIT	include/ae.h	48;"	d
+AE_ERR	include/ae.h	39;"	d
+AE_FILE_EVENTS	include/ae.h	45;"	d
+AE_NOMORE	include/ae.h	50;"	d
+AE_NONE	include/ae.h	41;"	d
+AE_NOTUSED	include/ae.h	53;"	d
+AE_OK	include/ae.h	38;"	d
+AE_READABLE	include/ae.h	42;"	d
+AE_SETSIZE	include/ae.h	36;"	d
+AE_TIME_EVENTS	include/ae.h	46;"	d
+AE_WRITABLE	include/ae.h	43;"	d
+ANET_CONNECT_NONBLOCK	src/anet.c	125;"	d	file:
+ANET_CONNECT_NONE	src/anet.c	124;"	d	file:
+ANET_ERR	include/anet.h	35;"	d
+ANET_ERR_LEN	include/anet.h	36;"	d
+ANET_H	include/anet.h	32;"	d
+ANET_OK	include/anet.h	34;"	d
+BASE_DIR	Makefile	/^BASE_DIR= .$/;"	m
+BASE_INC	Makefile	/^BASE_INC= ${BASE_DIR}\/include$/;"	m
+CC	Makefile	/^CC=gcc$/;"	m
+CHUNK_ALIGN_BYTES	src/slabs.c	33;"	d	file:
+DATA_BUFFER_SIZE	include/memcached.h	5;"	d
+FLAG	Makefile	/^FLAG= ${LIBDIR} ${LIB} ${INC}$/;"	m
+HASHPOWER	src/assoc.c	37;"	d	file:
+INC	Makefile	/^INC= $/;"	m
+IOV_LIST_HIGHWAT	include/memcached.h	23;"	d
+IOV_LIST_INITIAL	include/memcached.h	15;"	d
+IOV_MAX	src/memcached.c	58;"	d	file:
+ITEM_DELETED	include/memcached.h	64;"	d
+ITEM_LINKED	include/memcached.h	63;"	d
+ITEM_LIST_HIGHWAT	include/memcached.h	22;"	d
+ITEM_LIST_INITIAL	include/memcached.h	12;"	d
+ITEM_SLABBED	include/memcached.h	67;"	d
+ITEM_data	include/memcached.h	91;"	d
+ITEM_key	include/memcached.h	87;"	d
+ITEM_ntotal	include/memcached.h	92;"	d
+ITEM_suffix	include/memcached.h	90;"	d
+LARGEST_ID	src/items.c	23;"	d	file:
+LIB	Makefile	/^LIB= $/;"	m
+LIBDIR	Makefile	/^LIBDIR= $/;"	m
+MAX_BUCKETS	include/memcached.h	175;"	d
+MAX_SENDBUF_SIZE	include/memcached.h	9;"	d
+MSG_LIST_HIGHWAT	include/memcached.h	24;"	d
+MSG_LIST_INITIAL	include/memcached.h	18;"	d
+NREAD_ADD	include/memcached.h	104;"	d
+NREAD_REPLACE	include/memcached.h	106;"	d
+NREAD_SET	include/memcached.h	105;"	d
+OBJS	Makefile	/^OBJS=$(patsubst %.c, %.o, $(SRCSNOTDIR)) $/;"	m
+POWER_BLOCK	src/slabs.c	32;"	d	file:
+POWER_LARGEST	src/slabs.c	31;"	d	file:
+POWER_SMALLEST	src/slabs.c	30;"	d	file:
+READ_BUFFER_HIGHWAT	include/memcached.h	21;"	d
+REALTIME_MAXDELTA	src/memcached.c	78;"	d	file:
+SRCS	Makefile	/^SRCS=$(wildcard *.c)$/;"	m
+SRCSNOTDIR	Makefile	/^SRCSNOTDIR=$(notdir $(SRCS))$/;"	m
+TARGET	Makefile	/^TARGET=memcached$/;"	m
+TRANSMIT_COMPLETE	src/memcached.c	71;"	d	file:
+TRANSMIT_HARD_ERROR	src/memcached.c	74;"	d	file:
+TRANSMIT_INCOMPLETE	src/memcached.c	72;"	d	file:
+TRANSMIT_SOFT_ERROR	src/memcached.c	73;"	d	file:
+UDP_HEADER_SIZE	include/memcached.h	8;"	d
+UDP_MAX_PAYLOAD_SIZE	include/memcached.h	7;"	d
+UDP_READ_BUFFER_SIZE	include/memcached.h	6;"	d
+_P1003_1B_VISIBLE	src/memcached.c	30;"	d	file:
+__AE_H__	include/ae.h	34;"	d
+__need_IOV_MAX	src/memcached.c	34;"	d	file:
+_hashitem_before	src/assoc.c	/^static item** _hashitem_before (char *key) {$/;"	f	file:
+_stritem	include/memcached.h	/^typedef struct _stritem {$/;"	s
+add_iov	src/memcached.c	/^int add_iov(conn *c, const void *buf, int len) {$/;"	f
+add_msghdr	src/memcached.c	/^int add_msghdr(conn *c)$/;"	f
+aeAddMillisecondsToNow	src/ae.c	/^static void aeAddMillisecondsToNow(long long milliseconds, long *sec, long *ms) {$/;"	f	file:
+aeApiAddEvent	src/ae.c	/^static int aeApiAddEvent(aeEventLoop *eventLoop, int fd, int mask) {$/;"	f	file:
+aeApiCreate	src/ae.c	/^static int aeApiCreate(aeEventLoop *eventLoop) {$/;"	f	file:
+aeApiDelEvent	src/ae.c	/^static void aeApiDelEvent(aeEventLoop *eventLoop, int fd, int delmask) {$/;"	f	file:
+aeApiFree	src/ae.c	/^static void aeApiFree(aeEventLoop *eventLoop) {$/;"	f	file:
+aeApiName	src/ae.c	/^static char *aeApiName(void) {$/;"	f	file:
+aeApiPoll	src/ae.c	/^static int aeApiPoll(aeEventLoop *eventLoop, struct timeval *tvp) {$/;"	f	file:
+aeApiState	src/ae.c	/^typedef struct aeApiState {$/;"	s	file:
+aeApiState	src/ae.c	/^} aeApiState;$/;"	t	typeref:struct:aeApiState	file:
+aeBeforeSleepProc	include/ae.h	/^typedef void aeBeforeSleepProc(struct aeEventLoop *eventLoop);$/;"	t
+aeCreateEventLoop	src/ae.c	/^aeEventLoop *aeCreateEventLoop(void) {$/;"	f
+aeCreateFileEvent	src/ae.c	/^int aeCreateFileEvent(aeEventLoop *eventLoop, int fd, int mask,$/;"	f
+aeCreateTimeEvent	src/ae.c	/^long long aeCreateTimeEvent(aeEventLoop *eventLoop, long long milliseconds,$/;"	f
+aeDeleteEventLoop	src/ae.c	/^void aeDeleteEventLoop(aeEventLoop *eventLoop) {$/;"	f
+aeDeleteFileEvent	src/ae.c	/^void aeDeleteFileEvent(aeEventLoop *eventLoop, int fd, int mask)$/;"	f
+aeDeleteTimeEvent	src/ae.c	/^int aeDeleteTimeEvent(aeEventLoop *eventLoop, long long id)$/;"	f
+aeEventFinalizerProc	include/ae.h	/^typedef void aeEventFinalizerProc(struct aeEventLoop *eventLoop, void *clientData);$/;"	t
+aeEventLoop	include/ae.h	/^typedef struct aeEventLoop {$/;"	s
+aeEventLoop	include/ae.h	/^} aeEventLoop;$/;"	t	typeref:struct:aeEventLoop
+aeFileEvent	include/ae.h	/^typedef struct aeFileEvent {$/;"	s
+aeFileEvent	include/ae.h	/^} aeFileEvent;$/;"	t	typeref:struct:aeFileEvent
+aeFileProc	include/ae.h	/^typedef void aeFileProc(struct aeEventLoop *eventLoop, int fd, void *clientData, int mask);$/;"	t
+aeFiredEvent	include/ae.h	/^typedef struct aeFiredEvent {$/;"	s
+aeFiredEvent	include/ae.h	/^} aeFiredEvent;$/;"	t	typeref:struct:aeFiredEvent
+aeGetApiName	src/ae.c	/^char *aeGetApiName(void) {$/;"	f
+aeGetTime	src/ae.c	/^static void aeGetTime(long *seconds, long *milliseconds)$/;"	f	file:
+aeMain	src/ae.c	/^void aeMain(aeEventLoop *eventLoop) {$/;"	f
+aeProcessEvents	src/ae.c	/^int aeProcessEvents(aeEventLoop *eventLoop, int flags)$/;"	f
+aeSearchNearestTimer	src/ae.c	/^static aeTimeEvent *aeSearchNearestTimer(aeEventLoop *eventLoop)$/;"	f	file:
+aeSetBeforeSleepProc	src/ae.c	/^void aeSetBeforeSleepProc(aeEventLoop *eventLoop, aeBeforeSleepProc *beforesleep) {$/;"	f
+aeStop	src/ae.c	/^void aeStop(aeEventLoop *eventLoop) {$/;"	f
+aeTimeEvent	include/ae.h	/^typedef struct aeTimeEvent {$/;"	s
+aeTimeEvent	include/ae.h	/^} aeTimeEvent;$/;"	t	typeref:struct:aeTimeEvent
+aeTimeProc	include/ae.h	/^typedef int aeTimeProc(struct aeEventLoop *eventLoop, long long id, void *clientData);$/;"	t
+aeWait	src/ae.c	/^int aeWait(int fd, int mask, long long milliseconds) {$/;"	f
+anetAccept	src/anet.c	/^int anetAccept(char *err, int serversock, char *ip, int *port)$/;"	f
+anetNonBlock	src/anet.c	/^int anetNonBlock(char *err, int fd)$/;"	f
+anetRead	src/anet.c	/^int anetRead(int fd, char *buf, int count)$/;"	f
+anetResolve	src/anet.c	/^int anetResolve(char *err, char *host, char *ipbuf)$/;"	f
+anetSetError	src/anet.c	/^static void anetSetError(char *err, const char *fmt, ...)$/;"	f	file:
+anetSetSendBuffer	src/anet.c	/^int anetSetSendBuffer(char *err, int fd, int buffsize)$/;"	f
+anetTcpConnect	src/anet.c	/^int anetTcpConnect(char *err, char *addr, int port)$/;"	f
+anetTcpGenericConnect	src/anet.c	/^static int anetTcpGenericConnect(char *err, char *addr, int port, int flags)$/;"	f	file:
+anetTcpKeepAlive	src/anet.c	/^int anetTcpKeepAlive(char *err, int fd)$/;"	f
+anetTcpNoDelay	src/anet.c	/^int anetTcpNoDelay(char *err, int fd)$/;"	f
+anetTcpNonBlockConnect	src/anet.c	/^int anetTcpNonBlockConnect(char *err, char *addr, int port)$/;"	f
+anetTcpServer	src/anet.c	/^int anetTcpServer(char *err, int port, char *bindaddr)$/;"	f
+anetWrite	src/anet.c	/^int anetWrite(int fd, char *buf, int count)$/;"	f
+apidata	include/ae.h	/^    void *apidata; \/* This is used for polling API specific data *\/$/;"	m	struct:aeEventLoop
+assoc_delete	src/assoc.c	/^void assoc_delete(char *key) {$/;"	f
+assoc_find	src/assoc.c	/^item *assoc_find(char *key) {$/;"	f
+assoc_init	src/assoc.c	/^void assoc_init(void) {$/;"	f
+assoc_insert	src/assoc.c	/^int assoc_insert(char *key, item *it) {$/;"	f
+beforesleep	include/ae.h	/^    aeBeforeSleepProc *beforesleep;$/;"	m	struct:aeEventLoop
+binary	include/memcached.h	/^    int    binary;    \/* are we in binary mode *\/$/;"	m	struct:__anon2
+bucket	include/memcached.h	/^    int    bucket;    \/* bucket number for the next command, if running as$/;"	m	struct:__anon2
+buckets	src/memcached.c	/^int *buckets = 0; \/* bucket->generation array for a managed instance *\/$/;"	v
+build_udp_headers	src/memcached.c	/^int build_udp_headers(conn *c) {$/;"	f
+bytes_read	include/memcached.h	/^    unsigned long long bytes_read;$/;"	m	struct:stats
+bytes_written	include/memcached.h	/^    unsigned long long bytes_written;$/;"	m	struct:stats
+chunk_size	include/memcached.h	/^    int chunk_size;$/;"	m	struct:settings
+clientData	include/ae.h	/^    void *clientData;$/;"	m	struct:aeFileEvent
+clientData	include/ae.h	/^    void *clientData;$/;"	m	struct:aeTimeEvent
+clock_handler	src/memcached.c	/^void clock_handler(int fd, short which, void *arg) {$/;"	f
+clockevent	src/memcached.c	/^struct event clockevent;$/;"	v	typeref:struct:event
+complete_nread	src/memcached.c	/^void complete_nread(conn *c) {$/;"	f
+conn	include/memcached.h	/^} conn;$/;"	t	typeref:struct:__anon2
+conn_cleanup	src/memcached.c	/^void conn_cleanup(conn *c) {$/;"	f
+conn_close	src/memcached.c	/^void conn_close(conn *c) {$/;"	f
+conn_closing	include/memcached.h	/^    conn_closing,    \/* closing this connection *\/$/;"	e	enum:conn_states
+conn_free	src/memcached.c	/^static void conn_free(conn *c) {$/;"	f	file:
+conn_init	src/memcached.c	/^void conn_init(void) {$/;"	f
+conn_listening	include/memcached.h	/^    conn_listening,  \/* the socket which listens for connections *\/$/;"	e	enum:conn_states
+conn_mwrite	include/memcached.h	/^    conn_mwrite      \/* writing out many items sequentially *\/$/;"	e	enum:conn_states
+conn_new	src/memcached.c	/^conn *conn_new(int sfd, int init_state, int event_flags, int read_buffer_size,$/;"	f
+conn_nread	include/memcached.h	/^    conn_nread,      \/* reading in a fixed number of bytes *\/$/;"	e	enum:conn_states
+conn_read	include/memcached.h	/^    conn_read,       \/* reading in a command line *\/$/;"	e	enum:conn_states
+conn_set_state	src/memcached.c	/^void conn_set_state(conn *c, int state) {$/;"	f
+conn_shrink	src/memcached.c	/^void conn_shrink(conn *c) {$/;"	f
+conn_states	include/memcached.h	/^enum conn_states {$/;"	g
+conn_structs	include/memcached.h	/^    unsigned int  conn_structs;$/;"	m	struct:stats
+conn_swallow	include/memcached.h	/^    conn_swallow,    \/* swallowing unnecessary bytes w\/o storing *\/$/;"	e	enum:conn_states
+conn_write	include/memcached.h	/^    conn_write,      \/* writing out a simple response *\/$/;"	e	enum:conn_states
+curr_bytes	include/memcached.h	/^    unsigned long long curr_bytes;$/;"	m	struct:stats
+curr_conns	include/memcached.h	/^    unsigned int  curr_conns;$/;"	m	struct:stats
+curr_items	include/memcached.h	/^    unsigned int  curr_items;$/;"	m	struct:stats
+current_time	src/memcached.c	/^volatile rel_time_t current_time;$/;"	v
+daemon	src/daemon.c	/^daemon(nochdir, noclose)$/;"	f
+delcurr	src/memcached.c	/^static int delcurr;$/;"	v	file:
+delete_handler	src/memcached.c	/^void delete_handler(int fd, short which, void *arg) {$/;"	f
+deleteevent	src/memcached.c	/^struct event deleteevent;$/;"	v	typeref:struct:event
+deltotal	src/memcached.c	/^static int deltotal;$/;"	v	file:
+do_realloc	src/memcached.c	/^int do_realloc(void **orig, int newsize, int bytes_per_item, int *size) {$/;"	f
+drive_machine	src/memcached.c	/^void drive_machine(conn *c) {$/;"	f
+end	include/memcached.h	/^    void * end[0];$/;"	m	struct:_stritem
+end_page_free	src/slabs.c	/^    unsigned int end_page_free; \/* number of items remaining at end of last alloced page *\/$/;"	m	struct:__anon1	file:
+end_page_ptr	src/slabs.c	/^    void *end_page_ptr;         \/* pointer to next free item at end of page, or 0 *\/$/;"	m	struct:__anon1	file:
+ensure_iov_space	src/memcached.c	/^int ensure_iov_space(conn *c) {$/;"	f
+epfd	src/ae.c	/^    int epfd;$/;"	m	struct:aeApiState	file:
+ev_flags	include/memcached.h	/^    short  ev_flags;$/;"	m	struct:__anon2
+event	include/memcached.h	/^    aeEventLoop *event;$/;"	m	struct:__anon2
+event_handler	src/memcached.c	/^void event_handler(aeEventLoop *el, int fd, void *privdata, int mask) {$/;"	f
+events	include/ae.h	/^    aeFileEvent events[AE_SETSIZE]; \/* Registered events *\/$/;"	m	struct:aeEventLoop
+events	src/ae.c	/^    struct epoll_event events[AE_SETSIZE];$/;"	m	struct:aeApiState	typeref:struct:aeApiState::epoll_event	file:
+evict_to_free	include/memcached.h	/^    int evict_to_free;$/;"	m	struct:settings
+exptime	include/memcached.h	/^    rel_time_t      exptime;    \/* expire time *\/$/;"	m	struct:_stritem
+factor	include/memcached.h	/^    double factor;          \/* chunk size growth factor *\/$/;"	m	struct:settings
+fd	include/ae.h	/^    int fd;$/;"	m	struct:aeFiredEvent
+finalizerProc	include/ae.h	/^    aeEventFinalizerProc *finalizerProc;$/;"	m	struct:aeTimeEvent
+fired	include/ae.h	/^    aeFiredEvent fired[AE_SETSIZE]; \/* Fired events *\/$/;"	m	struct:aeEventLoop
+freeconns	src/memcached.c	/^conn **freeconns;$/;"	v
+freecurr	src/memcached.c	/^int freecurr;$/;"	v
+freetotal	src/memcached.c	/^int freetotal;$/;"	v
+gen	include/memcached.h	/^    int    gen;       \/* generation requested for the bucket *\/$/;"	m	struct:__anon2
+get_cmds	include/memcached.h	/^    unsigned long long  get_cmds;$/;"	m	struct:stats
+get_hits	include/memcached.h	/^    unsigned long long  get_hits;$/;"	m	struct:stats
+get_item	src/memcached.c	/^item *get_item(char *key) {$/;"	f
+get_item_notedeleted	src/memcached.c	/^item *get_item_notedeleted(char *key, int *delete_locked) {$/;"	f
+get_misses	include/memcached.h	/^    unsigned long long  get_misses;$/;"	m	struct:stats
+grow_slab_list	src/slabs.c	/^static int grow_slab_list (unsigned int id) {$/;"	f	file:
+h_next	include/memcached.h	/^    struct _stritem *h_next;    \/* hash chain next *\/$/;"	m	struct:_stritem	typeref:struct:_stritem::_stritem
+hash	src/assoc.c	/^ub4 hash( k, length, initval)$/;"	f
+hashmask	src/assoc.c	40;"	d	file:
+hashsize	src/assoc.c	39;"	d	file:
+hashtable	src/assoc.c	/^static item** hashtable = 0;$/;"	v	file:
+hdrbuf	include/memcached.h	/^    unsigned char *hdrbuf; \/* udp packet headers *\/$/;"	m	struct:__anon2
+hdrsize	include/memcached.h	/^    int    hdrsize;   \/* number of headers' worth of space is allocated *\/$/;"	m	struct:__anon2
+heads	src/items.c	/^static item *heads[LARGEST_ID];$/;"	v	file:
+icurr	include/memcached.h	/^    item   **icurr;$/;"	m	struct:__anon2
+id	include/ae.h	/^    long long id; \/* time event identifier. *\/$/;"	m	struct:aeTimeEvent
+ileft	include/memcached.h	/^    int    ileft;$/;"	m	struct:__anon2
+ilist	include/memcached.h	/^    item   **ilist;   \/* list of items to write out *\/$/;"	m	struct:__anon2
+interface	include/memcached.h	/^    struct in_addr interface;$/;"	m	struct:settings	typeref:struct:settings::in_addr
+iov	include/memcached.h	/^    struct iovec *iov;$/;"	m	struct:__anon2	typeref:struct:__anon2::iovec
+iovsize	include/memcached.h	/^    int    iovsize;   \/* number of elements allocated in iov[] *\/$/;"	m	struct:__anon2
+iovused	include/memcached.h	/^    int    iovused;   \/* number of elements used in iov[] *\/$/;"	m	struct:__anon2
+isize	include/memcached.h	/^    int    isize;$/;"	m	struct:__anon2
+it_flags	include/memcached.h	/^    unsigned char   it_flags;   \/* ITEM_* above *\/$/;"	m	struct:_stritem
+item	include/memcached.h	/^    void   *item;     \/* for commands set\/add\/replace  *\/$/;"	m	struct:__anon2
+item	include/memcached.h	/^} item;$/;"	t	typeref:struct:_stritem
+item_alloc	src/items.c	/^item *item_alloc(char *key, int flags, rel_time_t exptime, int nbytes) {$/;"	f
+item_cachedump	src/items.c	/^char *item_cachedump(unsigned int slabs_clsid, unsigned int limit, unsigned int *bytes) {$/;"	f
+item_comm	include/memcached.h	/^    int    item_comm; \/* which one is it: set\/add\/replace *\/$/;"	m	struct:__anon2
+item_delete_lock_over	src/memcached.c	/^int item_delete_lock_over (item *it) {$/;"	f
+item_free	src/items.c	/^void item_free(item *it) {$/;"	f
+item_init	src/items.c	/^void item_init(void) {$/;"	f
+item_link	src/items.c	/^int item_link(item *it) {$/;"	f
+item_link_q	src/items.c	/^void item_link_q(item *it) { \/* item is the new head *\/$/;"	f
+item_make_header	src/items.c	/^int item_make_header(char *key, int flags, int nbytes,$/;"	f
+item_remove	src/items.c	/^void item_remove(item *it) {$/;"	f
+item_replace	src/items.c	/^int item_replace(item *it, item *new_it) {$/;"	f
+item_size_ok	src/items.c	/^int item_size_ok(char *key, int flags, int nbytes) {$/;"	f
+item_stats	src/items.c	/^void item_stats(char *buffer, int buflen) {$/;"	f
+item_stats_sizes	src/items.c	/^char* item_stats_sizes(int *bytes) {$/;"	f
+item_unlink	src/items.c	/^void item_unlink(item *it) {$/;"	f
+item_unlink_q	src/items.c	/^void item_unlink_q(item *it) {$/;"	f
+item_update	src/items.c	/^void item_update(item *it) {$/;"	f
+killing	src/slabs.c	/^    unsigned int killing;  \/* index+1 of dying slab, or zero if none *\/$/;"	m	struct:__anon1	file:
+l_socket	src/memcached.c	/^int l_socket=0;$/;"	v
+list_size	src/slabs.c	/^    unsigned int list_size; \/* size of prev array *\/$/;"	m	struct:__anon1	file:
+main	src/memcached.c	/^int main (int argc, char **argv) {$/;"	f
+managed	include/memcached.h	/^    int managed;          \/* if 1, a tracker manages virtual buckets *\/$/;"	m	struct:settings
+mask	include/ae.h	/^    int mask; \/* one of AE_(READABLE|WRITABLE) *\/$/;"	m	struct:aeFileEvent
+mask	include/ae.h	/^    int mask;$/;"	m	struct:aeFiredEvent
+maxbytes	include/memcached.h	/^    size_t maxbytes;$/;"	m	struct:settings
+maxconns	include/memcached.h	/^    int maxconns;$/;"	m	struct:settings
+maxfd	include/ae.h	/^    int maxfd;$/;"	m	struct:aeEventLoop
+maximize_sndbuf	src/memcached.c	/^void maximize_sndbuf(int sfd) {$/;"	f
+mem_limit	src/slabs.c	/^static size_t mem_limit = 0;$/;"	v	file:
+mem_malloced	src/slabs.c	/^static size_t mem_malloced = 0;$/;"	v	file:
+mix	src/assoc.c	42;"	d	file:
+msgbytes	include/memcached.h	/^    int    msgbytes;  \/* number of bytes in current msg *\/$/;"	m	struct:__anon2
+msgcurr	include/memcached.h	/^    int    msgcurr;   \/* element in msglist[] being transmitted now *\/$/;"	m	struct:__anon2
+msglist	include/memcached.h	/^    struct msghdr *msglist;$/;"	m	struct:__anon2	typeref:struct:__anon2::msghdr
+msgsize	include/memcached.h	/^    int    msgsize;   \/* number of elements allocated in msglist[] *\/$/;"	m	struct:__anon2
+msgused	include/memcached.h	/^    int    msgused;   \/* number of elements used in msglist[] *\/$/;"	m	struct:__anon2
+nbytes	include/memcached.h	/^    int             nbytes;     \/* size of data *\/$/;"	m	struct:_stritem
+new_socket	src/memcached.c	/^int new_socket(int is_udp) {$/;"	f
+new_socket_unix	src/memcached.c	/^int new_socket_unix(void) {$/;"	f
+next	include/ae.h	/^    struct aeTimeEvent *next;$/;"	m	struct:aeTimeEvent	typeref:struct:aeTimeEvent::aeTimeEvent
+next	include/memcached.h	/^    struct _stritem *next;$/;"	m	struct:_stritem	typeref:struct:_stritem::_stritem
+nkey	include/memcached.h	/^    unsigned char   nkey;       \/* key length, w\/terminating null and padding *\/$/;"	m	struct:_stritem
+nsuffix	include/memcached.h	/^    unsigned char   nsuffix;    \/* length of flags-and-length string *\/$/;"	m	struct:_stritem
+oldest_live	include/memcached.h	/^    rel_time_t oldest_live; \/* ignore existing items older than this *\/$/;"	m	struct:settings
+out_string	src/memcached.c	/^void out_string(conn *c, char *str) {$/;"	f
+perslab	src/slabs.c	/^    unsigned int perslab;   \/* how many items per slab *\/$/;"	m	struct:__anon1	file:
+port	include/memcached.h	/^    int port;$/;"	m	struct:settings
+power_largest	src/slabs.c	/^static int power_largest;$/;"	v	file:
+pre_gdb	src/memcached.c	/^void pre_gdb () {$/;"	f
+prev	include/memcached.h	/^    struct _stritem *prev;$/;"	m	struct:_stritem	typeref:struct:_stritem::_stritem
+processTimeEvents	src/ae.c	/^static int processTimeEvents(aeEventLoop *eventLoop) {$/;"	f	file:
+process_command	src/memcached.c	/^void process_command(conn *c, char *command) {$/;"	f
+process_stat	src/memcached.c	/^void process_stat(conn *c, char *command) {$/;"	f
+rbuf	include/memcached.h	/^    char   *rbuf;   \/* buffer to read commands into *\/$/;"	m	struct:__anon2
+rbytes	include/memcached.h	/^    int    rbytes;  \/* how much data, starting from rcur, do we have unparsed *\/$/;"	m	struct:__anon2
+rcurr	include/memcached.h	/^    char   *rcurr;  \/* but if we parsed some already, this is where we stopped *\/$/;"	m	struct:__anon2
+realtime	src/memcached.c	/^rel_time_t realtime(time_t exptime) {$/;"	f
+refcount	include/memcached.h	/^    unsigned short  refcount;$/;"	m	struct:_stritem
+rel_time_t	include/memcached.h	/^typedef unsigned int rel_time_t;$/;"	t
+remove_pidfile	src/memcached.c	/^void remove_pidfile(char *pid_file) {$/;"	f
+request_addr	include/memcached.h	/^    struct sockaddr request_addr; \/* Who sent the most recent request *\/$/;"	m	struct:__anon2	typeref:struct:__anon2::sockaddr
+request_addr_size	include/memcached.h	/^    socklen_t request_addr_size;$/;"	m	struct:__anon2
+request_id	include/memcached.h	/^    int    request_id; \/* Incoming UDP request ID, if this is a UDP "connection" *\/$/;"	m	struct:__anon2
+rfileProc	include/ae.h	/^    aeFileProc *rfileProc;$/;"	m	struct:aeFileEvent
+ritem	include/memcached.h	/^    char   *ritem;  \/* when we read in an item's value, it goes here *\/$/;"	m	struct:__anon2
+rlbytes	include/memcached.h	/^    int    rlbytes;$/;"	m	struct:__anon2
+rsize	include/memcached.h	/^    int    rsize;   \/* total allocated size of rbuf *\/$/;"	m	struct:__anon2
+save_pid	src/memcached.c	/^void save_pid(pid_t pid,char *pid_file) {$/;"	f
+sbytes	include/memcached.h	/^    int    sbytes;    \/* how many bytes to swallow *\/$/;"	m	struct:__anon2
+server_socket	src/memcached.c	/^int server_socket(int port, int is_udp) {$/;"	f
+server_socket_unix	src/memcached.c	/^int server_socket_unix(char *path) {$/;"	f
+set_cmds	include/memcached.h	/^    unsigned long long  set_cmds;$/;"	m	struct:stats
+set_current_time	src/memcached.c	/^void set_current_time () {$/;"	f
+settings	include/memcached.h	/^struct settings {$/;"	s
+settings	src/memcached.c	/^struct settings settings;$/;"	v	typeref:struct:settings
+settings_init	src/memcached.c	/^void settings_init(void) {$/;"	f
+sfd	include/memcached.h	/^    int    sfd;$/;"	m	struct:__anon2
+sig_handler	src/memcached.c	/^void sig_handler(int sig) {$/;"	f
+size	src/slabs.c	/^    unsigned int size;      \/* sizes of items *\/$/;"	m	struct:__anon1	file:
+sizes	src/items.c	/^unsigned int sizes[LARGEST_ID];$/;"	v
+sl_curr	src/slabs.c	/^    unsigned int sl_curr;   \/* first free slot *\/$/;"	m	struct:__anon1	file:
+sl_total	src/slabs.c	/^    unsigned int sl_total;  \/* size of previous array *\/$/;"	m	struct:__anon1	file:
+slab_list	src/slabs.c	/^    void **slab_list;       \/* array of slab pointers *\/$/;"	m	struct:__anon1	file:
+slabclass	src/slabs.c	/^static slabclass_t slabclass[POWER_LARGEST+1];$/;"	v	file:
+slabclass_t	src/slabs.c	/^} slabclass_t;$/;"	t	typeref:struct:__anon1	file:
+slabs	src/slabs.c	/^    unsigned int slabs;     \/* how many slabs were allocated for this class *\/$/;"	m	struct:__anon1	file:
+slabs_alloc	src/slabs.c	/^void *slabs_alloc(size_t size) {$/;"	f
+slabs_clsid	include/memcached.h	/^    unsigned char   slabs_clsid;\/* which slab class we're in *\/$/;"	m	struct:_stritem
+slabs_clsid	src/slabs.c	/^unsigned int slabs_clsid(size_t size) {$/;"	f
+slabs_free	src/slabs.c	/^void slabs_free(void *ptr, size_t size) {$/;"	f
+slabs_init	src/slabs.c	/^void slabs_init(size_t limit, double factor) {$/;"	f
+slabs_newslab	src/slabs.c	/^int slabs_newslab(unsigned int id) {$/;"	f
+slabs_preallocate	src/slabs.c	/^void slabs_preallocate (unsigned int maxslabs) {$/;"	f
+slabs_reassign	src/slabs.c	/^int slabs_reassign(unsigned char srcid, unsigned char dstid) {$/;"	f
+slabs_stats	src/slabs.c	/^char* slabs_stats(int *buflen) {$/;"	f
+slots	src/slabs.c	/^    void **slots;           \/* list of item ptrs *\/$/;"	m	struct:__anon1	file:
+socketpath	include/memcached.h	/^    char *socketpath;   \/* path to unix socket if using local socket *\/$/;"	m	struct:settings
+started	include/memcached.h	/^    time_t        started;          \/* when the process was started *\/$/;"	m	struct:stats
+state	include/memcached.h	/^    int    state;$/;"	m	struct:__anon2
+stats	include/memcached.h	/^struct stats {$/;"	s
+stats	src/memcached.c	/^struct stats stats;$/;"	v	typeref:struct:stats
+stats_init	src/memcached.c	/^void stats_init(void) {$/;"	f
+stats_reset	src/memcached.c	/^void stats_reset(void) {$/;"	f
+stop	include/ae.h	/^    int stop;$/;"	m	struct:aeEventLoop
+tails	src/items.c	/^static item *tails[LARGEST_ID];$/;"	v	file:
+time	include/memcached.h	/^    rel_time_t      time;       \/* least recent access *\/$/;"	m	struct:_stritem
+timeEventHead	include/ae.h	/^    aeTimeEvent *timeEventHead;$/;"	m	struct:aeEventLoop
+timeEventNextId	include/ae.h	/^    long long timeEventNextId;$/;"	m	struct:aeEventLoop
+timeProc	include/ae.h	/^    aeTimeProc *timeProc;$/;"	m	struct:aeTimeEvent
+todelete	src/memcached.c	/^static item **todelete = 0;$/;"	v	file:
+total_conns	include/memcached.h	/^    unsigned int  total_conns;$/;"	m	struct:stats
+total_items	include/memcached.h	/^    unsigned int  total_items;$/;"	m	struct:stats
+transmit	src/memcached.c	/^int transmit(conn *c) {$/;"	f
+try_read_command	src/memcached.c	/^int try_read_command(conn *c) {$/;"	f
+try_read_network	src/memcached.c	/^int try_read_network(conn *c) {$/;"	f
+try_read_udp	src/memcached.c	/^int try_read_udp(conn *c) {$/;"	f
+u_socket	src/memcached.c	/^int u_socket=-1;$/;"	v
+ub1	src/assoc.c	/^typedef  unsigned       char ub1;   \/* unsigned 1-byte quantities *\/$/;"	t	file:
+ub4	src/assoc.c	/^typedef  unsigned long  int  ub4;   \/* unsigned 4-byte quantities *\/$/;"	t	file:
+udp	include/memcached.h	/^    int    udp;       \/* 1 if this is a UDP "connection" *\/$/;"	m	struct:__anon2
+udpport	include/memcached.h	/^    int udpport;$/;"	m	struct:settings
+update_event	src/memcached.c	/^int update_event(conn *c, int new_flags) {$/;"	f
+usage	src/memcached.c	/^void usage(void) {$/;"	f
+usage_license	src/memcached.c	/^void usage_license(void) {$/;"	f
+verbose	include/memcached.h	/^    int verbose;$/;"	m	struct:settings
+wbuf	include/memcached.h	/^    char   *wbuf;$/;"	m	struct:__anon2
+wbytes	include/memcached.h	/^    int    wbytes;$/;"	m	struct:__anon2
+wcurr	include/memcached.h	/^    char   *wcurr;$/;"	m	struct:__anon2
+wfileProc	include/ae.h	/^    aeFileProc *wfileProc;$/;"	m	struct:aeFileEvent
+when_ms	include/ae.h	/^    long when_ms; \/* milliseconds *\/$/;"	m	struct:aeTimeEvent
+when_sec	include/ae.h	/^    long when_sec; \/* seconds *\/$/;"	m	struct:aeTimeEvent
+which	include/memcached.h	/^    short  which;   \/* which events were just triggered *\/$/;"	m	struct:__anon2
+write_and_free	include/memcached.h	/^    void   *write_and_free; \/* free this memory after finishing writing *\/$/;"	m	struct:__anon2
+write_and_go	include/memcached.h	/^    int    write_and_go; \/* which state to go into after finishing current write *\/$/;"	m	struct:__anon2
+wsize	include/memcached.h	/^    int    wsize;$/;"	m	struct:__anon2

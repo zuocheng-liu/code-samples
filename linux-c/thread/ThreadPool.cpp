@@ -6,7 +6,9 @@
 #include <queue>
 #include <vector>
 using namespace std;
-
+/*
+ * 任务缺少队列，不能
+ */
 class Thread {
     public :
         Thread(void *(*func)(void *), void *arg = NULL);
@@ -33,6 +35,8 @@ class ThreadPool {
     protected :
         static void* run(void * arg);
         ThreadTypePtrVector _threadVector;
+        u_int32_t _threadNum;
+        u_int32_t _idle; // the number of idle threads
         u_int32_t _threadNum;
         static pthread_cond_t _cond;
         static pthread_mutex_t _mutex;
@@ -92,13 +96,13 @@ ThreadPool<ThreadType>::ThreadPool(u_int32_t threadNum) {
     pthread_cond_init(&_cond, NULL);  
     
     _threadNum = threadNum;
+    _idle = threadNum;
     _threadVector.resize(threadNum);
     for (int i = 0; i < threadNum; ++ i ) {
         ptr = new ThreadType(run);
         _threadVector[i] = ptr;
     }
 }
-
 
 template<class ThreadType>
 ThreadPool<ThreadType>::~ThreadPool() {
@@ -110,7 +114,9 @@ template<class ThreadType>
 void ThreadPool<ThreadType>::addTask() {
     pthread_mutex_lock(&_mutex);  
     // Exclusive operation here
-    pthread_cond_signal(&_cond);  
+    if (_idle > 0) {
+        pthread_cond_signal(&_cond);
+    }  
     pthread_mutex_unlock(&_mutex);
 }
 
@@ -120,9 +126,7 @@ void ThreadPool<ThreadType>::stop() {
     
     typename ThreadTypePtrVector::iterator it;
     for(it = _threadVector.begin(); it != _threadVector.end(); ++ it) {
-        cout<<__LINE__<<endl;
         (*it)->exit(NULL);
-        cout<<__LINE__<<endl;
         delete *it;
     }
     cout<<__LINE__<<endl;
@@ -133,15 +137,15 @@ void* ThreadPool<ThreadType>::run(void *arg) {
     for(;;) {
         pthread_mutex_lock(&_mutex);  
         cout<<"Before waiting : " << pthread_self() <<endl;
+        ++ _idle;
         pthread_cond_wait(&_cond, &_mutex);  
         // Exclusive operation here
+        -- _idle;
         pthread_mutex_unlock(&_mutex);
         cout<<"Thread ID : " << pthread_self() <<endl;
         usleep(1000 * 3000);  
     }
 }
-
-
 // End Thread Define
 
 int main() {
