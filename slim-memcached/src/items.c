@@ -14,7 +14,6 @@
 #include <netinet/in.h>
 #include <errno.h>
 #include <time.h>
-#include <event.h>
 #include <assert.h>
 
 #include "memcached.h"

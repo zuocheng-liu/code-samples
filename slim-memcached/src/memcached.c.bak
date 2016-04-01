@@ -29,7 +29,10 @@
 #ifndef _P1003_1B_VISIBLE
 #define _P1003_1B_VISIBLE
 #endif
-
+/* need this to get IOV_MAX on some platforms. */
+#ifndef __need_IOV_MAX
+#define __need_IOV_MAX
+#endif
 #include <pwd.h>
 #include <sys/mman.h>
 #include <fcntl.h>
@@ -2231,8 +2234,11 @@ int main (int argc, char **argv) {
 
     /* lock paged memory if needed */
     if (lock_memory) {
+#ifdef HAVE_MLOCKALL
         mlockall(MCL_CURRENT | MCL_FUTURE);
+#else
         fprintf(stderr, "warning: mlockall() not supported on this platform.  proceeding without.\n");
+#endif
     }
 
     /*
