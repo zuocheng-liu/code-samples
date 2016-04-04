@@ -1,5 +1,9 @@
 /* -*- Mode: C; tab-width: 4; c-basic-offset: 4; indent-tabs-mode: nil -*- */
 /* $Id$ */
+#include "ae.h"
+
+#define VERSION "1.2.0"
+#define PACKAGE "memached"
 #define DATA_BUFFER_SIZE 2048
 #define UDP_READ_BUFFER_SIZE 65536
 #define UDP_MAX_PAYLOAD_SIZE 1400
@@ -106,7 +110,7 @@ enum conn_states {
 typedef struct {
     int    sfd;
     int    state;
-    struct event event;
+    struct aeEventLoop *event;
     short  ev_flags;
     short  which;   /* which events were just triggered */
 
@@ -232,7 +236,8 @@ char* slabs_stats(int *buflen);
 int slabs_reassign(unsigned char srcid, unsigned char dstid);
 
 /* event handling, network IO */
-void event_handler(int fd, short which, void *arg);
+//int event_handler(int fd, short which, void *arg);
+void event_handler(aeEventLoop *el, int fd, void *privdata, int mask);
 conn *conn_new(int sfd, int init_state, int event_flags, int read_buffer_size, int is_udp);
 void conn_close(conn *c);
 void conn_init(void);

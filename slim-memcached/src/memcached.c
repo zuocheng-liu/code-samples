@@ -46,17 +46,13 @@
 #include <assert.h>
 #include <limits.h>
 
-#ifdef HAVE_MALLOC_H
-#include <malloc.h>
-#endif
 
 /* FreeBSD 4.x doesn't have IOV_MAX exposed. */
 #ifndef IOV_MAX
-#if defined(__FreeBSD__)
 # define IOV_MAX 1024
 #endif
-#endif
-
+#include "ae.h"
+#include "anet.h"
 #include "memcached.h"
 
 struct stats stats;
@@ -65,6 +61,7 @@ struct settings settings;
 static item **todelete = 0;
 static int delcurr;
 static int deltotal;
+struct aeEventLoop *g_el;
 
 #define TRANSMIT_COMPLETE   0
 #define TRANSMIT_INCOMPLETE 1
@@ -278,10 +275,11 @@ conn *conn_new(int sfd, int init_state, int event_flags, int read_buffer_size,
     c->bucket = -1;
     c->gen = 0;
 
-    event_set(&c->event, sfd, event_flags, event_handler, (void *)c);
+    //event_set(&c->event, sfd, event_flags, event_handler, (void *)c);
     c->ev_flags = event_flags;
 
-    if (event_add(&c->event, 0) == -1) {
+    //if (event_add(&c->event, 0) == -1) {
+    if (aeCreateFileEvent(g_el, sfd, event_flags, event_handler, (void *)c) == AE_ERR) {
         if (freecurr < freetotal) {
             freeconns[freecurr++] = c;
         } else {
@@ -344,8 +342,9 @@ static void conn_free(conn *c) {
 
 void conn_close(conn *c) {
     /* delete the event, the socket and the conn */
-    event_del(&c->event);
-
+    //event_del(&c->event);
+    aeDeleteFileEvent(g_el, c->sfd, AE_READABLE); 
+    aeDeleteFileEvent(g_el, c->sfd, AE_WRITABLE);
     if (settings.verbose > 1)
         fprintf(stderr, "<%d connection closed.\n", c->sfd);
 
@@ -651,7 +650,7 @@ void process_stat(conn *c, char *command) {
         pos += sprintf(pos, "STAT uptime %u\r\n", now);
         pos += sprintf(pos, "STAT time %ld\r\n", now + stats.started);
         pos += sprintf(pos, "STAT version " VERSION "\r\n");
-        pos += sprintf(pos, "STAT pointer_size %d\r\n", 8 * sizeof(void*));
+        pos += sprintf(pos, "STAT pointer_size %ld\r\n", 8 * sizeof(void*));
         pos += sprintf(pos, "STAT rusage_user %ld.%06ld\r\n", usage.ru_utime.tv_sec, usage.ru_utime.tv_usec);
         pos += sprintf(pos, "STAT rusage_system %ld.%06ld\r\n", usage.ru_stime.tv_sec, usage.ru_stime.tv_usec);
         pos += sprintf(pos, "STAT curr_items %u\r\n", stats.curr_items);
@@ -1330,10 +1329,13 @@ int try_read_network(conn *c) {
 int update_event(conn *c, int new_flags) {
     if (c->ev_flags == new_flags)
         return 1;
-    if (event_del(&c->event) == -1) return 0;
-    event_set(&c->event, c->sfd, new_flags, event_handler, (void *)c);
+    //if (event_del(&c->event) == -1) return 0;
+    //event_set(&c->event, c->sfd, new_flags, event_handler, (void *)c);
     c->ev_flags = new_flags;
-    if (event_add(&c->event, 0) == -1) return 0;
+    //if (event_add(&c->event, 0) == -1) return 0;
+    if(aeCreateFileEvent(g_el, c->sfd, AE_READABLE, event_handler, (void *)c) == AE_ERR) {
+        return 0;
+    }
     return 1;
 }
 
@@ -1377,7 +1379,8 @@ int transmit(conn *c) {
             return TRANSMIT_INCOMPLETE;
         }
         if (res == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
-            if (!update_event(c, EV_WRITE | EV_PERSIST)) {
+            //if (!update_event(c, EV_WRITE | EV_PERSIST)) {
+            if (!update_event(c, AE_WRITABLE)) {
                 if (settings.verbose > 0)
                     fprintf(stderr, "Couldn't update event\n");
                 conn_set_state(c, conn_closing);
@@ -1428,8 +1431,8 @@ void drive_machine(conn *c) {
                 close(sfd);
                 break;
             }
-            newc = conn_new(sfd, conn_read, EV_READ | EV_PERSIST,
-                            DATA_BUFFER_SIZE, 0);
+            //newc = conn_new(sfd, conn_read, EV_READ | EV_PERSIST,DATA_BUFFER_SIZE, 0);
+            newc = conn_new(sfd, conn_read, AE_READABLE, DATA_BUFFER_SIZE, 0);
             if (!newc) {
                 if (settings.verbose > 0)
                     fprintf(stderr, "couldn't create new connection\n");
@@ -1447,7 +1450,8 @@ void drive_machine(conn *c) {
                 continue;
             }
             /* we have no command line and no data to read from network */
-            if (!update_event(c, EV_READ | EV_PERSIST)) {
+            //if (!update_event(c, EV_READ | EV_PERSIST)) {
+            if (!update_event(c, AE_READABLE)) {
                 if (settings.verbose > 0)
                     fprintf(stderr, "Couldn't update event\n");
                 conn_set_state(c, conn_closing);
@@ -1486,7 +1490,8 @@ void drive_machine(conn *c) {
                 break;
             }
             if (res == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
-                if (!update_event(c, EV_READ | EV_PERSIST)) {
+                //if (!update_event(c, EV_READ | EV_PERSIST)) {
+                if (!update_event(c, AE_READABLE)) {
                     if (settings.verbose > 0)
                         fprintf(stderr, "Couldn't update event\n");
                     conn_set_state(c, conn_closing);
@@ -1529,7 +1534,8 @@ void drive_machine(conn *c) {
                 break;
             }
             if (res == -1 && (errno == EAGAIN || errno == EWOULDBLOCK)) {
-                if (!update_event(c, EV_READ | EV_PERSIST)) {
+                //if (!update_event(c, EV_READ | EV_PERSIST)) {
+                if (!update_event(c, AE_READABLE)) {
                     if (settings.verbose > 0)
                         fprintf(stderr, "Couldn't update event\n");
                     conn_set_state(c, conn_closing);
@@ -1611,11 +1617,15 @@ void drive_machine(conn *c) {
     return;
 }
 
-void event_handler(int fd, short which, void *arg) {
-    conn *c;
+//void event_handler(int fd, short which, void *arg) {
+void event_handler(aeEventLoop *el, int fd, void *privdata, int mask) {
+    AE_NOTUSED(el); 
+    AE_NOTUSED(mask); 
 
-    c = (conn *)arg;
-    c->which = which;
+    conn *c;
+    //c = (conn *)arg;
+    c = (conn *)privdata;
+    //c->which = which;
 
     /* sanity */
     if (fd != c->sfd) {
@@ -1819,12 +1829,14 @@ void set_current_time () {
     current_time = (rel_time_t) (time(0) - stats.started);
 }
 
-void clock_handler(int fd, short which, void *arg) {
+//void clock_handler(int fd, short which, void *arg) {
+int clock_handler(struct aeEventLoop *eventLoop, long long id, void *clientData) {
+    /*
     struct timeval t;
     static int initialized = 0;
 
     if (initialized) {
-        /* only delete the event if it's actually there. */
+        // only delete the event if it's actually there.
         evtimer_del(&clockevent);
     } else {
         initialized = 1;
@@ -1834,19 +1846,23 @@ void clock_handler(int fd, short which, void *arg) {
     t.tv_sec = 1;
     t.tv_usec = 0;
     evtimer_add(&clockevent, &t);
-
+    */
     set_current_time();
+    return 1000 * 1000;
 }
 
 struct event deleteevent;
 
-void delete_handler(int fd, short which, void *arg) {
+//void delete_handler(int fd, short which, void *arg) {
+int delete_handler(struct aeEventLoop *eventLoop, long long id, void *clientData) {
+    /*
     struct timeval t;
     static int initialized = 0;
-
+    */
+    /*
     if (initialized) {
-        /* some versions of libevent don't like deleting events that don't exist,
-           so only delete once we know this event has been added. */
+         some versions of libevent don't like deleting events that don't exist,
+           so only delete once we know this event has been added. 
         evtimer_del(&deleteevent);
     } else {
         initialized = 1;
@@ -1855,7 +1871,7 @@ void delete_handler(int fd, short which, void *arg) {
     evtimer_set(&deleteevent, delete_handler, 0);
     t.tv_sec = 5; t.tv_usec=0;
     evtimer_add(&deleteevent, &t);
-
+    */
     {
         int i, j=0;
         rel_time_t now = current_time;
@@ -1872,6 +1888,7 @@ void delete_handler(int fd, short which, void *arg) {
         }
         delcurr = j;
     }
+    return 1000 * 1000;
 }
 
 void usage(void) {
@@ -2022,6 +2039,8 @@ int main (int argc, char **argv) {
 
     /* init settings */
     settings_init();
+    
+    g_el = aeCreateEventLoop();
 
     /* set stderr non-buffering (for running under, say, daemontools) */
     setbuf(stderr, NULL);
@@ -2213,7 +2232,7 @@ int main (int argc, char **argv) {
 
     /* initialize other stuff */
     item_init();
-    event_init();
+    //event_init();
     stats_init();
     assoc_init();
     conn_init();
@@ -2247,27 +2266,31 @@ int main (int argc, char **argv) {
         exit(1);
     }
     /* create the initial listening connection */
-    if (!(l_conn = conn_new(l_socket, conn_listening, EV_READ | EV_PERSIST, 1, 0))) {
+   //if (!(l_conn = conn_new(l_socket, conn_listening, EV_READ | EV_PERSIST, 1, 0))) {
+    if (!(l_conn = conn_new(l_socket, conn_listening, AE_READABLE, 1, 0))) {
         fprintf(stderr, "failed to create listening connection");
         exit(1);
     }
-    /* create the initial listening udp connection */
-    if (u_socket > -1 &&
+    /* create the initial listening udp connection     
+      if (u_socket > -1 &&
         !(u_conn = conn_new(u_socket, conn_read, EV_READ | EV_PERSIST, UDP_READ_BUFFER_SIZE, 1))) {
         fprintf(stderr, "failed to create udp connection");
         exit(1);
-    }
+    }*/
     /* initialise clock event */
-    clock_handler(0,0,0);
+    //clock_handler(0,0,0);
+    aeCreateTimeEvent(g_el, 1000 * 1000, clock_handler, NULL, NULL);
     /* initialise deletion array and timer event */
     deltotal = 200; delcurr = 0;
     todelete = malloc(sizeof(item *)*deltotal);
-    delete_handler(0,0,0); /* sets up the event */
+    //delete_handler(0,0,0); /* sets up the event */
+    aeCreateTimeEvent(g_el, 1000 * 1000, delete_handler, NULL, NULL);
     /* save the PID in if we're a daemon */
     if (daemonize)
         save_pid(getpid(),pid_file);
     /* enter the loop */
-    event_loop(0);
+    aeMain(g_el);
+    aeDeleteEventLoop(g_el);
     /* remove the PID file if we're a daemon */
     if (daemonize)
         remove_pidfile(pid_file);
