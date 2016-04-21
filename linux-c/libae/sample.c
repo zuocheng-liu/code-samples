@@ -41,10 +41,10 @@ void acceptTcpHandler(aeEventLoop *el, int fd, void *privdata, int mask) {
     AE_NOTUSED(el);
     AE_NOTUSED(mask);
     AE_NOTUSED(privdata);
-
+setvbuf(stdout,NULL,_IONBF,0);
     connfd = anetAccept(errmsg, fd, client_ip, &cport);
     if (connfd == AE_ERR) {
-        printf("Accepting client connection: %s", errmsg);
+        fprintf(stderr,"Accepting client connection: %s", errmsg);
         return;
     }
     fprintf(stdout, "Accepted %s:%d", client_ip, cport);
@@ -85,10 +85,10 @@ int main() {
     serveraddr.sin_port = htons(SERV_PORT);
     bind(listenfd, (struct sockaddr *)&serveraddr, sizeof(serveraddr));
     listen(listenfd, LISTENQ);
-    fprintf(stdout, "CreateFileEvent \r\n");
+    fprintf(stderr, "CreateFileEvent \r\n");
     /* create the file event */
     if (aeCreateFileEvent(el, listenfd, AE_READABLE,acceptTcpHandler,NULL) == AE_ERR) {
-        printf( "Unrecoverable error creating l_socket file event.");
+        fprintf(stderr ,"Unrecoverable error creating l_socket file event.");
     }
     printf("Event Loop\r\n");
     aeMain(el);
