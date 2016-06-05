@@ -61,8 +61,8 @@ public :
     // 常量命名，在名称前加k
     const int kDaysInAWeek = 7;   
 
-    GoogleCodeStyle();
-    ~GoogleCodeStyle();
+    GoogleCodeStyle() {}
+    ~GoogleCodeStyle() {}
     // **函数注释**
     // 函数声明处注释描述函数功能，定义处描述函数实现.
     // - inputs（输入）及outputs（输出）；
