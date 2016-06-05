@@ -100,7 +100,7 @@ InputStream& InputStream::getline(char* s, std::streamsize n) {
     char_type* p = (char_type*)s;
     return getline(p, n);
 }
-// InputStream ends
+/* InputStream ends */
 
 OutputStream::OutputStream(OutputStreamBuffer& buf) : byte_ostream(&buf) {
 }
@@ -127,4 +127,4 @@ OutputStream& OutputStream::write(const char* s, std::streamsize n) {
     char_type* p = (char_type*)s;
     return write(s, n);
 }
-// OutputStream ends
+/* OutputStream ends */
