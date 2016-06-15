@@ -1,9 +1,12 @@
-#include<stdio.h>
-#include<stdlib.h>
-#include<sys/time.h>
+#include <unistd.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/time.h>
 #include <list>
 #include <vector>
 #include <iostream>
+#include <algorithm>
 
 #define MAX_NUM 100000
 
@@ -26,6 +29,9 @@ uint64_t stopTimer() {
     return timer;
 }
 
+void operate(uint32_t &rhs) {
+}
+
 int main() {
     vector<uint32_t> v;
     vector<uint32_t> v2;
@@ -37,7 +43,17 @@ int main() {
         v.push_back(num);
         l.push_back(num);
     }
+ 
+    // compare for_each traverse
+    startTimer();   
+    for_each (v.begin(), v.end(), operate);
+    cout<<"vector\t for_each\t :\t"<< stopTimer() << endl;  
     
+    startTimer();   
+    for_each (l.begin(), l.end(), operate);
+    cout<<"list\t for_each\t :\t"<< stopTimer() << endl;  
+
+   
     // compare oper traverse
     startTimer();   
     for (vector<uint32_t>::iterator iter = v.begin(); iter != v.end(); ++ iter) {
