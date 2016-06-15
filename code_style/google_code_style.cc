@@ -31,6 +31,7 @@
 // 至少文档说明其行为。
 #define MAX((a), (b)) ((a) > (b) ? (a): (b)) 
 
-uint32_t GoogleCodeStyle::MyExcitingMethod(CodeStype &code_style, char *output) {
+uint32_t GoogleCodeStyle::MyExcitingMethod(CodeStyle &code_style, 
+                                           char *output) {
           
 }
