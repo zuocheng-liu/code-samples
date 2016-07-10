@@ -5,7 +5,8 @@
 
 class AsyncTask {
     public :
-        virtual void execute();
+        virtual ~AsyncTask() {}
+        virtual void execute() = 0;
 };
 
 class AsyncTaskManager {
@@ -13,15 +14,15 @@ class AsyncTaskManager {
         inline void addTask(AsyncTask& task) {
             _taskQueue.push(&task);
         }
+
         inline void execute() {
-            while (!_taskQueue.empty) {
+            while (!_taskQueue.empty()) {
                 const AsyncTask *task = _taskQueue.front();
                 task->execute();
             }
         }
     private :
         std::queue<AsyncTask *> _taskQueue;
-        
 };
 
 #endif

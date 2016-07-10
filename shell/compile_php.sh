@@ -23,3 +23,37 @@
      --with-mcrypt \
      --with-mysqli=mysqlnd \
      --with-curl=/usr/local
+
+
+./configure --prefix=/usr/local/php7 \
+    --with-config-file-path=/usr/local/php7/etc \
+    --with-mcrypt=/usr/include \
+    --with-mysql=mysqlnd \
+    --with-mysqli=mysqlnd \
+    --with-pdo-mysql=mysqlnd \
+    --with-gd \
+    --with-iconv \
+    --with-zlib \
+    --enable-xml \
+    --enable-bcmath \
+    --enable-shmop \
+    --enable-sysvsem \
+    --enable-inline-optimization \
+    --enable-mbregex \
+    --enable-fpm \
+    --enable-mbstring \
+    --enable-ftp \
+    --enable-gd-native-ttf \
+    --with-openssl \
+    --enable-pcntl \
+    --enable-sockets \
+    --with-xmlrpc \
+    --enable-zip \
+    --enable-soap \
+    --without-pear \
+    --with-gettext \
+    --enable-session \
+    --with-curl \
+    --with-jpeg-dir \
+    --with-freetype-dir \
+    --enable-opcache
