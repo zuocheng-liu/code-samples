@@ -14,6 +14,8 @@ sudo apt-get install librecode-dev
 sudo apt-get install libbz2-dev
 sudo apt-get install libssl-dev
 
+./buildconf --force # for php 5.6 without configure
+
 ./configure \
      --prefix=$HOME/local/php7 \
      --with-config-file-path=$HOME/local/php7/etc \
