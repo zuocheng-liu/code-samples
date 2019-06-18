@@ -1,14 +1,23 @@
+// compile : g++ -msse4.2 -mavx2 -O3 -o hamming_distance hamming_distance.cpp
+
 #include <iostream>
 #include <cstdlib>
 #include <ctime>
-#include <iomanip>
-#include <random>
-#include <queue>
+#include <fstream>
 #include <sys/time.h>
 #include <stdint.h>
+#include <queue>
+#include <iomanip>
+
+// sse4.2   gcc -msse4.2
+#include <nmmintrin.h> // SSE4.2 , gcc -msse4.2
+#include <emmintrin.h> // SSE2 , gcc -msse
+#include <mmintrin.h> // MMX
+// avx 
+#include <immintrin.h>
 using namespace std;
-//#define TEST_SIZE 100000000
-#define TEST_SIZE 1000000
+// #define TEST_SIZE 100000000
+// #define TEST_SIZE 1000000
 
 uint64_t pop_count_base(uint64_t n) {
   uint8_t res = 0;
@@ -58,8 +67,7 @@ class AlgorithmBench {
     void init() {
       startTimer();
       vector = new uint64_t[size];
-      default_random_engine e;
-
+      ifstream f("sample.txt", ios::in);
       for(int i = 0; i < size;i++ ) {
         uint64_t c;
         f >> vector[i];
@@ -317,16 +325,74 @@ class HammingDistanceDivideConquerOpt : public Algorithm {
 
 };
 
+class HammingDistanceSSE : public Algorithm {
+  public:
+    std::string getName() {
+      return "HammingDistanceSSE";
+    }
+    
+    uint64_t cal(const uint64_t* p, const uint64_t* q, const uint64_t size) {
+      uint64_t res = 0;
+      uint64_t temp_res[2] = {0, 0};
+      for (uint64_t i = 0; i < size; i += 2) { 
+        __m64 *x1 = (__m64*)(p);
+        __m64 *x2 = (__m64*)(p + 1);
+        __m64 *y1 = (__m64*)(q);
+        __m64 *y2 = (__m64*)(q + 1);
+        __m128i z1 = _mm_set_epi64 (*x1, *x2);
+        __m128i z2 = _mm_set_epi64 (*y1, *y2);
+        __m128i xor_res =  _mm_xor_si128(z1 , z2);
+        _mm_store_si128((__m128i*)temp_res, xor_res);
+        res += _mm_popcnt_u64(temp_res[0]);
+        res += _mm_popcnt_u64(temp_res[1]);
+      }
+      return res;
+    }
+};
+
+class HammingDistanceAVX : public Algorithm {
+  public:
+    std::string getName() {
+      return "HammingDistanceAVX";
+    }
+    
+    uint64_t cal(const uint64_t* p, const uint64_t* q, const uint64_t size) {
+      uint64_t res = 0;
+      uint64_t temp_res[4] = {0, 0, 0, 0};
+      for (uint64_t i = 0; i < size - 1; i += 4) { 
+        long long int *x1 = (long long int*)(p + i);
+        long long int *x2 = (long long int*)(p + i + 1);
+        long long int *x3 = (long long int*)(p + i + 2);
+        long long int *x4 = (long long int*)(p + i + 3);
+        long long int *y1 = (long long int*)(q + i);
+        long long int *y2 = (long long int*)(q + i + 1);
+        long long int *y3 = (long long int*)(q + i + 2);
+        long long int *y4 = (long long int*)(q + i + 3);
+        __m256i z1 = _mm256_set_epi64x (*x1, *x2, *x3, *x4);
+        __m256i z2 = _mm256_set_epi64x (*y1, *y2, *y3, *y4);
+        __m256i xor_res =  _mm256_xor_si256(z1 , z2);
+        _mm256_store_si256((__m256i*)temp_res, xor_res);
+        res += _mm_popcnt_u64(temp_res[0]);
+        res += _mm_popcnt_u64(temp_res[1]);
+        res += _mm_popcnt_u64(temp_res[2]);
+        res += _mm_popcnt_u64(temp_res[3]);
+      }
+      return res;
+    }
+};
+
 int main() {
   AlgorithmBench algorithm_bench;
   algorithm_bench.setSize(10000000);
   algorithm_bench.push_back(new HammingDistanceBase);
-  algorithm_bench.push_back(new HammingDistanceBaseAsm);
+//  algorithm_bench.push_back(new HammingDistanceBaseAsm);
   algorithm_bench.push_back(new HammingDistanceBuildin);
   algorithm_bench.push_back(new HammingDistanceTable8Bit);
   algorithm_bench.push_back(new HammingDistanceTable16Bit);
   algorithm_bench.push_back(new HammingDistanceDivideConquer);
   algorithm_bench.push_back(new HammingDistanceDivideConquerOpt);
+  algorithm_bench.push_back(new HammingDistanceSSE);
+  algorithm_bench.push_back(new HammingDistanceAVX);
   algorithm_bench.init();
   algorithm_bench.start();
   return 0;

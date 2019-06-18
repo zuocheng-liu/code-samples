@@ -196,7 +196,7 @@ class Settings {
                 exit(-1);
             }
 
-            // parase Port
+            // parse Port
             // case for :8080
             if (std::string::npos != colonsPos) {
                 size_t portStartPos = colonsPos + 1;
@@ -233,12 +233,12 @@ class Settings {
        
     private :
         void _usage() {
-            std::cout << PROGRAM_NAME " " PROGRAM_VERSION 
+            std::cout << std::endl << PROGRAM_NAME " " PROGRAM_VERSION 
             << std::endl << "-f <filename> request file path, maybe nginx access log"
-            << std::endl << "-t <num>      request file type, 1 for nginx access log, 0 for other , default is 1"
+            << std::endl << "-t <num>      request file type, 1 for nginx access log, 0 for others , default is 1"
             << std::endl << "-u <url>      request url prefix, unsuport https, such as http://www.bullsoft.org"
-            << std::endl << "-H <host>     http request header Host, default NULL"
-            << std::endl << "-c <num>      the umber of concurrent threads, default is 100"
+            << std::endl << "-H <host>     http request header Host, default is NULL"
+            << std::endl << "-c <num>      the number of concurrent threads, default is 100"
             << std::endl << "-h            print this help and exit"
             << std::endl
             //<< std::endl printf("-r            regex expression, used to extract request string from log file \n"); 
@@ -285,9 +285,9 @@ class BoolBenchThread : public Thread {
                 
                 int sock = _getSocket();
                 if (sock < 0) {
-                    std::cerr<<"Error: sock fail :" 
-                        << _settings.domainName <<':'
-                        <<_settings.port<<std::endl;
+                    std::cerr << "Error: sock fail :" 
+                        << _settings.domainName << ':' << _settings.port 
+                        << std::endl;
                     succ = -1;
                     continue;
                 }
@@ -300,8 +300,9 @@ class BoolBenchThread : public Thread {
                 // Read all
                 char response[8192];
                 while (read(sock,response,8192) > 0) {
-                    //std::cout<< response;
+                    // do nothing;
                 }
+                close(sock);
                 succ = 1;
             } // end for
         }
@@ -352,7 +353,6 @@ class BoolBenchThread : public Thread {
             //strcat(request,"Connection: keep-alive\r\n");
             strcat(request,"Keep-Alive: timeout=20\r\n");
             strcat(request,"\r\n"); 
-            // printf("Req=%s\n",request);
         }
 
         Settings& _settings;
