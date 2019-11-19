@@ -12,6 +12,7 @@
 #include <sys/shm.h>
 #include <pthread.h>
 
+#define PORT 8888
 #define BUFFER_SIZE 4096
 #define RESPONSE_HEADER "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Type: text/html\r\n\r\n"
 #define RESPONSE_BODY "<h1>Hello!</h1>"
@@ -33,7 +34,7 @@ int handle(int conn){
 }
 
 int main(int argc,char *argv[]){
-    int port = atoi(argv[1]);
+    int port = PORT;
     struct sockaddr_in client_sockaddr;     
     struct sockaddr_in server_sockaddr;
     socklen_t length = sizeof(struct sockaddr_in);
