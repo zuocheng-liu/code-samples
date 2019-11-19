@@ -1,21 +1,17 @@
+#include <stdio.h>
+#include <stdlib.h>
 #include <sys/types.h>
 #include <sys/socket.h>
-#include <stdio.h>
 #include <netinet/in.h>
 #include <arpa/inet.h>
 #include <unistd.h>
 #include <string.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <dirent.h>
-#include <sys/stat.h>
-#include <sys/shm.h>
-#include <pthread.h>
 
 #define PORT 8888
 #define BUFFER_SIZE 4096
 #define RESPONSE_HEADER "HTTP/1.1 200 OK\r\nConnection: close\r\nAccept-Ranges: bytes\r\nContent-Type: text/html\r\n\r\n"
 #define RESPONSE_BODY "<h1>Hello!</h1>"
+
 int handle(int conn){
     int len = 0;
     char buffer[BUFFER_SIZE];
@@ -37,11 +33,10 @@ int main(int argc,char *argv[]){
     int port = PORT;
     struct sockaddr_in client_sockaddr;     
     struct sockaddr_in server_sockaddr;
-    socklen_t length = sizeof(struct sockaddr_in);
-    
-    int conn,err=0;
     int listenfd = socket(AF_INET,SOCK_STREAM,0);
     int opt = 1; 
+    int conn;
+    socklen_t length = sizeof(struct sockaddr_in);
     setsockopt(listenfd, SOL_SOCKET, SO_REUSEADDR, &opt, sizeof(int));
     server_sockaddr.sin_family = AF_INET;
     server_sockaddr.sin_port = htons(port);
