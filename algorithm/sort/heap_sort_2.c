@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#define swap((a),(b)) ((a)^=(b)^=(a)^=(b))
 
 void heap_ajust(int *list, int length , int root) {
     int i;
