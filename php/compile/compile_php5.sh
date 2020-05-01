@@ -19,6 +19,7 @@ sudo apt-get install libssl-dev
 ./configure \
      --prefix=$HOME/local/php7 \
      --with-config-file-path=$HOME/local/php7/etc \
+     --with-config-file-scan-dir=$HOME/local/php7/etc \
      --enable-ftp \
      --enable-inline-optimization \
      --enable-mbstring \
@@ -42,6 +43,6 @@ sudo apt-get install libssl-dev
 #    --with-freetype-dir=/usr/lib64/libfreetype.so\
 
 # make && make install
-
+#export PHPRC=/home/i/local/php/etc
 
 
