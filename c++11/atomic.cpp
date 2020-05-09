@@ -25,7 +25,7 @@ int main() {
         workers.emplace_back([]{
             for (;;) {
               if (!run) continue;
-              for (int j = 0; j < 10000; ++j) {
+              for (int j = 0; j < 1e7; ++j) {
                   generateUniqueId();
               };
             return true;
