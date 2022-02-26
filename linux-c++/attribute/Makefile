@@ -1,6 +1,6 @@
 .PHONY : all clean
 
-all : main main_lws main_lsw main_with_strong main_ls main_with_weak
+all : main main_lws main_lsw main_with_strong main_ls
 
 libstrong.so :
 	gcc -shared -fPIC -o libstrong.so strong.c
@@ -10,8 +10,6 @@ main :
 	gcc -o main main.c weak.c strong.c
 main_with_strong :
 	gcc -o main_with_strong main_with_strong.c
-main_with_weak :
-	gcc -o main_with_weak main_with_weak.c -L. -lstrong
 main_ls : libstrong.so 
 	gcc -o main_ls main.c -L. -lstrong 
 main_lws : libstrong.so libweak.so
@@ -19,4 +17,4 @@ main_lws : libstrong.so libweak.so
 main_lsw : libstrong.so libweak.so
 	gcc -o main_lsw main.c -L. -lstrong -lweak 
 clean :
-	rm -f  *.so main main_lws main_lsw main_ls main_with_strong main_with_weak
+	rm -f  *.so main main_lws main_lsw main_ls main_with_strong
